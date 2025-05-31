@@ -1,10 +1,10 @@
 import json
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ElementTree
 from abc import ABC, abstractmethod
 
 
 class Book:
-    def __init__(self, title: str, content: str):
+    def __init__(self, title: str, content: str) -> None:
         self.title = title
         self.content = content
 
@@ -38,12 +38,12 @@ class JsonSerialize(SerializeStrategy):
 
 class XmlSerialize(SerializeStrategy):
     def serialize(self, book: Book) -> str:
-        root = ET.Element("book")
-        title = ET.SubElement(root, "title")
+        root = ElementTree.Element("book")
+        title = ElementTree.SubElement(root, "title")
         title.text = book.title
-        content = ET.SubElement(root, "content")
+        content = ElementTree.SubElement(root, "content")
         content.text = book.content
-        return ET.tostring(root, encoding="unicode")
+        return ElementTree.tostring(root, encoding="unicode")
 
 
 class PrintStrategy(ABC):
@@ -51,10 +51,12 @@ class PrintStrategy(ABC):
     def print_book(self, book: Book) -> None:
         pass
 
+
 class ConsolePrint(PrintStrategy):
     def print_book(self, book: Book) -> None:
         print(f"Printing the book: {book.title}...")
         print(book.content)
+
 
 class ReversePrint(PrintStrategy):
     def print_book(self, book: Book) -> None:
