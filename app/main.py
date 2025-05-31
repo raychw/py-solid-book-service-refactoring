@@ -80,7 +80,6 @@ def main(book: Book, commands: list[tuple[str, str]]) -> list[str] | None:
         }
     }
 
-    results = []
     for cmd, method_type in commands:
         strategy = strategy_map.get(cmd, {}).get(method_type)
 
@@ -92,8 +91,7 @@ def main(book: Book, commands: list[tuple[str, str]]) -> list[str] | None:
         elif cmd == "print":
             strategy.print_book(book)
         elif cmd == "serialize":
-            results.append(strategy.serialize(book))
-    return results if results else None
+            strategy.serialize(book)
 
 
 if __name__ == "__main__":
