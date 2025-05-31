@@ -87,11 +87,11 @@ def main(book: Book, commands: list[tuple[str, str]]) -> list[str] | None:
             raise ValueError(f"Unknown {cmd} type: {method_type}")
 
         if cmd == "display":
-            strategy.display(book)
+            return strategy.display(book)
         elif cmd == "print":
-            strategy.print_book(book)
+            return strategy.print_book(book)
         elif cmd == "serialize":
-            strategy.serialize(book)
+            return strategy.serialize(book)
 
 
 if __name__ == "__main__":
