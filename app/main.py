@@ -64,7 +64,7 @@ class ReversePrint(PrintStrategy):
         print(book.content[::-1])
 
 
-def main(book: Book, commands: list[tuple[str, str]]) -> str | None:
+def main(book: Book, commands: list[tuple[str, str]]) -> list[str] | None:
     strategy_map = {
         "display": {
             "console": ConsoleDisplay(),
@@ -80,6 +80,7 @@ def main(book: Book, commands: list[tuple[str, str]]) -> str | None:
         }
     }
 
+    results = []
     for cmd, method_type in commands:
         strategy = strategy_map.get(cmd, {}).get(method_type)
 
@@ -91,7 +92,8 @@ def main(book: Book, commands: list[tuple[str, str]]) -> str | None:
         elif cmd == "print":
             strategy.print_book(book)
         elif cmd == "serialize":
-            return strategy.serialize(book)
+            results.append(strategy.serialize(book))
+    return results if results else None
 
 
 if __name__ == "__main__":
